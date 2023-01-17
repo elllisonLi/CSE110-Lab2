@@ -1,5 +1,7 @@
 package edu.ucsd.cse110.lab2;
 
+import static edu.ucsd.cse110.lab2.Utilities.trimDisplayStr;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -104,14 +106,14 @@ public class MainActivity extends AppCompatActivity {
 
         // Parse the current number and save it to "previous value".
         storedValue = new BigDecimal(displayStr);
-        clearDisplay(displayStr);
+        clearDisplay();
 
         // Set the pending operation.
         pendingOp = Optional.of(btn.getText().toString());
     }
 
     private void onClearButtonClicked(View view) {
-        clearDisplay(displayStr);
+        clearDisplay();
     }
 
     private void onEqualsButtonClicked(View view) {
@@ -136,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
         // Clear the pending operation and update the display.
         pendingOp = Optional.empty();
         displayStr = String.valueOf(result);
-        Utilities.trimDisplayStr(displayStr);
+        displayStr = trimDisplayStr(displayStr);
         updateDisplay();
     }
 
@@ -144,9 +146,8 @@ public class MainActivity extends AppCompatActivity {
         display.setText(displayStr);
     }
 
-    private void clearDisplay(String displayStr) {
+    private void clearDisplay() {
         displayStr = "0";
         updateDisplay();
     }
-
 }
